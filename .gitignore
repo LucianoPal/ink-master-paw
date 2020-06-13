@@ -1,0 +1,5 @@
+*.idea/
+*app/views/cache/
+*vendor/
+*config.php
+*logs/

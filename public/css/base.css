@@ -1,0 +1,239 @@
+@import url("https://fonts.googleapis.com/css?family=Fira+Sans");
+
+* {
+    box-sizing: border-box;
+    --color-logo: #A31D21; /*Auburn*/
+}
+
+body {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content min-content 1fr max-content;
+    grid-template-areas:
+            "encabezado encabezado"
+            "navegador navegador"
+            "principal autor"
+            "pie pie";
+    background-color: #FFFFFF;
+    font-size: 100%;
+    font-family: "Fira Sans", Helvetica, Arial, sans-serif;
+    /*-webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;*/
+    width: 100%;
+    max-width: 1920px;
+    min-height: 100vh;
+    margin: 0 auto;
+}
+
+nav {
+    grid-area: navegador;
+}
+
+main {
+    grid-area: principal;
+}
+
+header{
+    grid-area: encabezado;
+    background-color: #464A4B; /* Davys grey*/
+    width: 100%;
+    position: relative;
+}
+
+footer {
+    grid-area: pie;
+    width: 100%;
+}
+
+header::after{
+    content: '';
+    clear: both;
+    display: block;
+}
+
+/*Nav principal está pensado Mobile first*/
+.site-nav{
+    top:100%;
+    left:0;
+    position: absolute;
+    background-color: var(--color-logo);
+    /* Animación para el menú */
+    clip-path: circle(0px at top left);
+    transition: clip-path ease-in-out 700ms;
+    width: 70%;
+}
+
+/*Agregar los prefijos para que clip-path sea compatible con todos los navegadores*/
+.site-nav-open{
+    clip-path: circle(150% at top right);
+}
+
+.site-nav ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.site-nav li{
+    border-bottom: 1px solid #575766;
+}
+
+.site-nav li:last-child{
+    border-bottom: none;
+}
+
+.site-nav a{
+    color: #ebedb3;
+    display: block;
+    padding: 2em 6em;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.site-nav a:hover,
+.site-nav a:focus{
+    background: #F6BD60; /*Maximun yellow red*/
+    color: #464655;
+}
+
+/*Esto que estoy haciendo acá es para desplegable de artistas*/
+li > ul {
+    display: none;
+}
+
+/*hasta acá*/
+
+/*el símbolo de menu desplegable*/
+.menu_toggle{
+    position: absolute;
+    left: 0.5em;
+    padding: 0.5em;
+}
+
+/*menu-open y site-nav-open son las clases que se agregan con js*/
+.menu-open .hamburger{
+    transform: rotate(45deg);
+}
+
+.menu-open .hamburger::before{
+    opacity: 0;
+}
+
+.menu-open .hamburger::after{
+    transform: translateY(-3px) rotate(-90deg);
+}
+
+.hamburger,
+.hamburger::before,
+.hamburger::after{
+    content: '';
+    display: block;
+    background: black;
+    height: 3px;
+    width: 1.75em;
+    border-radius: 3px;
+    transition: all ease-in-out 500ms;
+}
+
+.hamburger::before{
+    transform: translateY(-6px);
+}
+
+.hamburger::after{
+    transform: translateY(3px);
+}
+
+.logo{
+    float: right;
+    max-width: 50%;
+    min-height: 100%;
+}
+
+.social-network {
+    float: right;
+    max-width: 30%;
+    min-height: 100%;
+}
+
+#icon-fb, #icon-inst, #icon-tw, #icon-yt {
+    float: left;
+    font-size: 1.5em;
+    width: 2em;
+    color: rgba(255, 255, 255, .4);
+}
+
+/*Versión del nav escritorio*/
+@media screen and (min-width:700px){
+    /*Esto hace que desaparezca la "hamburguesa"*/
+    .menu_toggle{
+        display: none;
+    }
+
+    .site-nav{
+        position: static;
+        width: 100%;
+        clip-path: initial;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    .site-nav li{
+        display: inline-block;
+        border: none;
+        padding: 1rem;
+    }
+
+    .site-nav a{
+        padding: 0;
+        margin-left: 3em;
+    }
+
+    .site-nav a:hover,
+    .site-nav a:focus{
+        background: transparent;
+    }
+
+    nav li:hover ul {
+        display: flex;
+        flex-flow: column;
+        position: absolute;
+        overflow: hidden;
+        background-color: var(--color-logo);
+        margin-top: 0.5rem;
+    }
+
+    nav li:hover ul li {
+        border-bottom: 1px solid #575766;
+    }
+
+    .social-network {
+        float: left;
+        margin-top: 1em;
+        margin-left: 1em;
+    }
+
+    #icon-fb, #icon-inst, #icon-tw, #icon-yt {
+        font-size: 2.5em;
+    }
+
+}
+
+/*Para pantallas muy grandes*/
+@media screen and (min-width:1920px) {
+    header {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    main {
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    footer {
+        width: 80%;
+        margin: 0 auto;
+    }
+}
+

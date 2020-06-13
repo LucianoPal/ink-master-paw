@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}
+    New Appointment
+{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+    <meta name="keywords" content="PAW,2020,Templates,PHP">
+    <link rel="stylesheet" type="text/css" href="/public/css/newAp.css">
+    <script type="text/javascript" src="/public/js/newAp.js"></script>
+{% endblock %}
+
+{% block header %}
+    {{ include('header.views.html') }}
+    {{ include('nav.views.html') }}
+    <!--{{ include('session.views.html') }}-->
+{% endblock %}
+
+{% block main %}
+
+    <form action="/save_appointment" method="post" enctype="multipart/form-data">
+        <h1> Solicitud de turno </h1>
+        <label>
+            Profesional
+            <select name="id_artist">
+                {% for artist in artists %}
+                    <option>{{ artist.id_user }}</option>
+                {% endfor %}
+            </select>
+        </label>
+
+        <label> Fecha: <input type="date" name="date" required></label>
+
+        <label> Horario (hh:min): <input type="time" min="08:00" max="17:00" step="900" name="hour" required></label>
+
+        <label> Imágenes de referencia <input type="file" name="reference_image" accept="image/jpeg, image/x-png, image/x-jpg"></label>
+
+        <label> Local: <input type="text" name="id_local" value="{{ local.id_local }}"></label>
+
+        <section>
+            <label> ¿Posee enfermedades que considere relevantes a la hora de realizar un tatuaje/pircing?
+                <input name="pathology" type="checkbox" onChange="comprobar(this);" />
+            </label>
+
+            <textarea class="disease" name="pathology-txt" id="pathology-txt"></textarea>
+        </section>
+
+        <section>
+            <label><input type="checkbox" name="terms"> Acepto los <a target="_blank" href="/term&cond">términos y condiciones</a></label>
+        </section>
+
+        <div>
+            <input class="button-newAp" type="reset" value="Limpiar" />
+
+            {% if not session.id_user %}
+                <input class="button-newAp" type="submit" value="Enviar" disabled/>
+            {% else %}
+                <input class="button-newAp" type="submit" value="Enviar" />
+            {% endif %}
+        </div>
+
+        <p class="footer-form"> Todos los campos son obligatorios</p><br>
+
+        {% if not session.id_user %}
+            (*) Se necesita estar logueado para poder registrar un turno<br>
+            <a href="/login">Iniciar sesión/Registrarse</a>
+        {% endif %}
+
+    </form>
+{% endblock %}
+
+{% block footer %}
+    {{ include('footer.views.html') }}
+{% endblock %}
