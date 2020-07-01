@@ -17,7 +17,7 @@ class Connection
         try {
             var_dump($config);
             return new PDO(
-                $config['connection'].';dbname='.$config['name'],
+                $config['connection'],
                 $config['username'],
                 $config['password'],
                 $config['options']
