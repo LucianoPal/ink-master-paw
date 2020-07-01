@@ -3,6 +3,7 @@
 use Monolog\Logger as MonologLogger;
 
 $db = getenv('DATABASE_URL');
+
 if ($db) {
     $dbopts = parse_url($db);
     $dbopts['dsn'] = sprintf(
@@ -18,7 +19,7 @@ if ($db) {
         "username" => 'root',
         "password" => '',
         "dsn" => 'mysql:host=127.0.0.1',
-    ]
+    ];
 }
 
 return [
