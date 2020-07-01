@@ -6,6 +6,7 @@ $db = getenv('DATABASE_URL');
 
 if ($db) {
     $dbopts = parse_url($db);
+    $dsn_template = "%s:host=%s;port=%s;dbname=%s";
     $dbopts['dsn'] = sprintf(
         $dsn_template,
         'pgsql',
@@ -15,16 +16,14 @@ if ($db) {
     );
 } else {
     $dbopts = [
-        "name" => 'inkmaster_db',
-        "username" => 'root',
-        "password" => '',
-        "dsn" => 'mysql:host=127.0.0.1',
+        "user" => 'root',
+        "pass" => '',
+        "dsn" => 'mysql:host=127.0.0.1;dbname=inkmaster_db',
     ];
 }
 
 return [
     'database' => [
-        'name' => $dbopts["name"],
         'username' => $dbopts['user'],
         'password' => $dbopts['pass'],
         'connection' => $dbopts['dsn'],
