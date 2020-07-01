@@ -6,6 +6,7 @@ $db = getenv('DATABASE_URL');
 
 if ($db) {
     $dbopts = parse_url($db);
+    $dsn_template = "%s:host=%s;port=%s;dbname=%s";
     $dbopts['dsn'] = sprintf(
         $dsn_template,
         'pgsql',
