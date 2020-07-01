@@ -15,6 +15,7 @@ class Connection
     public static function make($config)
     {
         try {
+            var_dump($config);
             return new PDO(
                 $config['connection'].';dbname='.$config['name'],
                 $config['username'],
