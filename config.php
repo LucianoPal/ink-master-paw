@@ -24,10 +24,10 @@ if ($db) {
 
 return [
     'database' => [
-        'name' => 'inkmaster_db',
-        'username' => 'root',
-        'password' => '',
-        'connection' => 'mysql:host=127.0.0.1',
+        'name' => $dbopts["name"],
+        'username' => $dbopts['user'],
+        'password' => $dbopts['pass'],
+        'connection' => $dbopts['dsn'],
         'options' => [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
         ]
